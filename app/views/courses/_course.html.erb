@@ -1,22 +1,43 @@
-<div id="<%= dom_id course %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Title:</strong>
-    <%= course.title %>
-  </p>
+<div id="<%= dom_id course %>" class="w-full flex border p-2">
+    <% @title=course.title %>
+    <div class="flex flex-col">
+        <div class="flex justify-between ">
+            <div class="flex flex-center  ">
+                <div class="text-xl">
+                    <%= link_to sanitize("&larr;"), root_path %>
+                </div>
+                <p class="font-bold text-xl "><%#= course.material_name %></p>
+            </div>
+        </div>
+        <div class="mt-4">
+            <h1 class="font-bold text-xl"><%= course.title %></h1>
+        </div>
+        <!-- Items of course -->
+        <div class="mt-2" data-controller="navigation" data-action="turbo:before-fetch-response@document->navigation#displayContent">
+            <%= turbo_frame_tag :index, class:"post-card" do %>
+                <%= link_to "", data: { turbo_frame: "details", 
+                    action: "turbo:click->navigation#displayLoading",
+                    navigation_target: "link" } do %>
+                    <%= truncate(strip_tags(course.content.to_s.html_safe), length: 600) %>
+                    <span class="ln-btn-color ln-btn-hover-color ">Voir plus</span>
+                <% end %>
+            <% end %>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Content:</strong>
-    <%= course.content %>
-  </p>
+            <div class="">
+                <%= turbo_frame_tag :details, class:"post-details",
+            "data-navigation-target": "content"  do %>
+                    Select a movie for more details...
+                <% end %>
+            </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">User:</strong>
-    <%= course.user_id %>
-  </p>
+        </div>
 
-  <% if action_name != "show" %>
-    <%= link_to "Show this course", course, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this course', edit_course_path(course), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
+        <!-- Bottom items of course -->
+        <div class="border-t mt-2">
+            <div class="flex justify-between my-1">
+                
+                <%= render "courses/shared/question", course: @course %>
+            </div>
+        </div>
+    </div>
 </div>

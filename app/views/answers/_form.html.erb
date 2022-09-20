@@ -1,0 +1,10 @@
+<%= form_with model: [question, answer], id: "answer_#{answer.new_record? ? "new" : answer.id}" do |f| %>
+
+
+<div class="my-2">
+<%= f.rich_text_area :content, placeholder:"votre reponse"  %>
+</div>
+
+<%= f.submit "Create Answer", class:"btn btn-primary mt-3" %>
+
+<% end %>

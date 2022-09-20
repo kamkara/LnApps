@@ -1,0 +1,47 @@
+<!-- Exercises feature-->
+<label class=" flex ml-2 text-sm font-semibold" for="question-modal">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="20px" height="20px" class="bg-white rounded-md px-1">
+        <g><path d="M480,224H288V32c0-17.673-14.327-32-32-32s-32,14.327-32,32v192H32c-17.673,0-32,14.327-32,32s14.327,32,32,32h192v192   c0,17.673,14.327,32,32,32s32-14.327,32-32V288h192c17.673,0,32-14.327,32-32S497.673,224,480,224z"/></g>
+        <span class="bg-black ml-2">Questions</span>
+    </label>
+
+    <!-- Echanges feature-->
+    <input type="checkbox" id="question-modal" class="modal-toggle"/>
+    <div class="modal modal-bottom sm:modal-middle" ">
+        <div class="modal-box md:w-10/12 md:max-w-4xl text-white bg-black border">
+            <div class="flex max-w-screen mx-auto">
+                <div class="mx-auto">
+                    <h1 class="flex items-center">
+                        <span class="">Les echanges sur la léçon</span>
+                    </h1>
+                </div>
+                <%= link_to new_course_question_path(course), class:" flex ml-4 md:mr-16 ln-btn-color ln-btn-hover-color " do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="12px" height="12px" class="md:hidden bg-white rounded-md px-1">
+                        <g><path d="M480,224H288V32c0-17.673-14.327-32-32-32s-32,14.327-32,32v192H32c-17.673,0-32,14.327-32,32s14.327,32,32,32h192v192   c0,17.673,14.327,32,32,32s32-14.327,32-32V288h192c17.673,0,32-14.327,32-32S497.673,224,480,224z"/></g>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" width="16px" height="16px" class="hidden md:block bg-white rounded-md px-1">
+                        <g><path d="M480,224H288V32c0-17.673-14.327-32-32-32s-32,14.327-32,32v192H32c-17.673,0-32,14.327-32,32s14.327,32,32,32h192v192   c0,17.673,14.327,32,32,32s32-14.327,32-32V288h192c17.673,0,32-14.327,32-32S497.673,224,480,224z"/></g>
+                    </svg>
+                    <span tabindex="0" class="text-xs md:mx-2 ">Posez  une question?</span>
+                <% end %>
+
+                <span class="modal-action flex items-end ">
+                    <label for="question-modal" class="btn btn-sm btn-circle absolute ">✕</label>
+                </span>
+            </div>
+            <% course.questions.each do |question| %>
+                <div tabindex="0" class="collapse border rounded-md my-4">
+                    <div class="collapse-title text-xl font-medium">
+                        <%= link_to question_path(question) do %>
+                            <%= question.title %>
+                            -
+                            <small class="ln-btn-color ln-btn-hover-color text-sm py-1 ">Voir reponse ou Repondes</small>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+            <div class="modal-action pb-4">
+                <label for="question-modal" class="btn btn-sm btn-circle absolute ">✕</label>
+            </div>
+        </div>
+    </div>

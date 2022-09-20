@@ -1,0 +1,44 @@
+<% @courses.each do |course| %>
+    <div class="w-full flex border-b p-2 border-gray-300">
+
+        <div class="flex flex-col ">
+            <div class="flex justify-between ">
+                <div class="flex-initial  ">
+                    <p class="font-bold text-xl "><%#= course.material_name %></p>
+                </div>
+            </div>
+            <div class="mt-4">
+                <h1 class="font-bold text-xl">
+                    <%= link_to course_path(course)  do %>
+                        <%= course.title %>
+                    <% end %>
+                </h1>
+            </div>
+            <div class="mt-1">
+                <%= link_to course_path(course)  do %>
+                    <%= truncate(strip_tags(course.content.to_s.html_safe), length: 400) %>
+                    <span class="ln-btn-color ln-btn-hover-color ">Voir plus</span>
+                <% end %>
+            </div>
+
+            <!-- Bottom items of course -->
+            <div class="border-t mt-2">
+                <div class="flex justify-between my-1">
+                    <p class="flex ml-2 text-md font-semibold">
+                        12
+                        <span class="bg-black ml-2">Essentiels</span>
+                    </p>
+                    <p class="flex ml-2 text-md font-semibold">
+                        14
+                        <span class="bg-black ml-2">Exercices</span>
+                    </p>
+                    <p class="flex ml-2 text-md font-semibold">
+                        102
+                        <span class="bg-black ml-2">Questions</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<% end %>

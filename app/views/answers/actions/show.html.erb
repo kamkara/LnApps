@@ -1,0 +1,21 @@
+<%= turbo_frame_tag dom_id(@answer, 'actions') do %>
+  <div class="flex mx-2">
+    <div class="flex justify-between ">
+      <% if @answer.user_id == current_user&.id %>
+      <div class="">
+        <%= link_to "Edit", edit_question_answer_path(@answer.question, @answer) %>
+      </div>
+      <div class="">
+        <%= link_to "Delete", question_answer_path(@answer.question, @answer), "data-turbo-method": :delete %>
+      </div>
+      <% end %>
+
+      <% if @answer.question.user_id == current_user&.id %>
+        <% label = @answer.correct_answer ? "Remove Correct" : "Mark as Correct" %>
+        <div class="">
+        <%= link_to label, question_answer_correct_path(@answer.question, @answer) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
