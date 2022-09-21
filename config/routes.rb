@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+ 
+  resources :comments do
+    resource :votes, only: :show
+  end
   resources :courses do
     resources :questions, except: [:index, :show]
   end
