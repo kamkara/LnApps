@@ -4,7 +4,8 @@
   <% end %>
 
 
-<%= turbo_stream_from :comments %>
+  <%= turbo_stream_from :comments %>
+  
   <div id="comments" class="min-w-full">
     <%= render @comments %>
   </div>
